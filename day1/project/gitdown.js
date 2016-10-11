@@ -1,11 +1,11 @@
 var request = require('request');
 var fs = require('fs');
 // This is used to add my API Token to the end of each endpoint URL
-// var dotenv = require('dotenv').config();
+var dotenv = require('dotenv').config();
 
 function getContributorsByURL(owner, repo, cb) {
   // Building the GitHub api endpoint URL + API access token
-  var endpoint = 'http://api.github.com/repos/' + owner + '/' + repo + '/contributors'; // + '?access_token=' + process.env.GITHUB_KEY;
+  var endpoint = 'http://api.github.com/repos/' + owner + '/' + repo + '/contributors' + '?access_token=' + process.env.GITHUB_KEY;
 
   var requestConfig = {
     url: endpoint,
