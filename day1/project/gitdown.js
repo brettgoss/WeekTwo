@@ -20,11 +20,22 @@ function getContributorsByURL(owner, repo, cb) {
       if (err) {
         throw err;
      }
+  //  console.log(response.headers);
     console.log("Response Status Code:", response.statusCode);
     // Only continue to map the request if the request was successful.
+    var dir = './avatars';
+    fs.stat(dir, function(err, stats){
+      if (err || !stats.isDirectory()) {
+        fs.mkdir(dir, function(err) {
+          if(err) {
+          }
+        });
+      }
+    })
     if(response.statusCode == 200) {
+
       body.map(function (usr) {
-        var path = "avatars/" + usr.login + '.jpg';
+        var path = dir + '/' + usr.login + '.jpg';
         var url = usr.avatar_url;
       cb(url, path);
       });
@@ -43,7 +54,7 @@ function getImage(url, path) {
   }
   var stream = request(requestConfig, function(err, response, body) {
     if (err) {
-      throw err;
+      console.log(err);
     }
     console.log("Response Status Code:", response.statusCode);
   });
