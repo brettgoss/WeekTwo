@@ -19,21 +19,20 @@ function getContributorsByURL(owner, repo, cb) {
   request(requestConfig, function(err, response, body) {
       if (err) {
         throw err;
-     }
-  //  console.log(response.headers);
+     };
     console.log("Response Status Code:", response.statusCode);
-    // Only continue to map the request if the request was successful.
-    var dir = './avatars';
-    fs.stat(dir, function(err, stats){
-      if (err || !stats.isDirectory()) {
-        fs.mkdir(dir, function(err) {
-          if(err) {
-          }
-        });
-      }
-    })
+    if (response.statusCode === 404) {
+      console.log("Not Found.")
+    }
+    // Only continue if the request was successful.
     if(response.statusCode == 200) {
-
+      var dir = './avatars';
+      // Tries to create directory. If directory exists, continue
+      fs.mkdir(dir, function(err){
+        if (err) {
+          console.log("Downloading to " + dir)
+        }
+      });
       body.map(function (usr) {
         var path = dir + '/' + usr.login + '.jpg';
         var url = usr.avatar_url;
@@ -54,9 +53,8 @@ function getImage(url, path) {
   }
   var stream = request(requestConfig, function(err, response, body) {
     if (err) {
-      console.log(err);
-    }
-    console.log("Response Status Code:", response.statusCode);
+      throw err;
+    };
   });
   // Pipes the request to a stream and writes to the given path.
   stream.pipe(fs.createWriteStream(path));
