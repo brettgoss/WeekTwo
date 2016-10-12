@@ -36,7 +36,7 @@ function getContributorsByURL(owner, repo, cb) {
       body.map(function (usr) {
         var path = dir + '/' + usr.login + '.jpg';
         var url = usr.avatar_url;
-      cb(url, path);
+        cb(url, path);
       });
     }
   });
