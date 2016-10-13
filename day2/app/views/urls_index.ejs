@@ -2,14 +2,23 @@
 <html lang="en">
 <body>
   <header>
-        <% include ../views/partials/_header %>
+        <% include partials/_header %>
   </header>
         <!-- Write EJS code here to display shortened links -->
-      <h2>URLS</h2>
+      <form action="/u" method="POST" style="margin:10px;">
+        <label for="longURL">Enter a URL:</label>
+        <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px">
+        <input type="submit" value="Submit">
+      </form>
       <ul>
         <% for(let key in urls){ %>
-          <li><a href="urls/:<%= key %>"><%= key %> - <%= urls[key] %></a></li>
-          <% }; %>
+          <li><%= key %> -> <a href="/u/<%= key %>"><%= urls[key] %></a>
+            <form action="/urls/<%= key %>/" method="POST">
+              <button>Edit</button>
+            </form>
+          </li>
+        <% }; %>
       </ul>
 </body>
 </html>
+<input id="edit" type="text" name="editURL" placeholder="">
