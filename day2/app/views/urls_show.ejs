@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<% include ../views/partials/_head %>
 <body>
+  <div class="container">
+
   <header>
     <% include ../views/partials/_header %>
   </header>
@@ -11,11 +14,12 @@
             <button>Delete</button>
           </form>
           <form action="/urls/<%= key %>/edit" method="POST">
-            <input type="text" name="edit" />
+            <input type="text" name="edit" value="<%= urls[key] %>" />
             <button>Edit</button>
           </form>
         </li>
       <% %>
     </ul>
+  </div>
   </body>
 </html>

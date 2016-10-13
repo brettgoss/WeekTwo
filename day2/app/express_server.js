@@ -15,14 +15,16 @@ function generateRandomString() {
 }
 
 var urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
+  "b2xvn2": "http://www.lighthouselabs.ca",
+  "9sm5xk": "http://www.google.com"
 };
 
 // Middleware
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(express.static(__dirname + '/assets'));
+
 // app.use(methodOverride('_method'))
 
 
