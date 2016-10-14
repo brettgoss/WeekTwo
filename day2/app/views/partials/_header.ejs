@@ -1,13 +1,22 @@
 <div class="row">
-
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="eleven" role="navigation">
       <div class="container-fluid">
-          <ul class="nav navbar-nav">
+          <ul class="u-pull-light">
               <li><a href="/">Home</a></li>
               <li><a href="/urls">URLs</a></li>
-          </ul>
-          <h2>URLS</h2>
 
+              <% if(!login) { %>
+               <form method="POST" action="/login">
+                 <input name="username" />
+                 <button action="submit">Login</button>
+               </form>
+               <% } else { %>
+               <form class="u-pull-right" method="POST" action="/logout">
+                 <h6><button action="submit">Logout</button></h6>
+               </form>
+               <a class="u-pull-right">Welcome, <%= login %>!</a>
+               <% } %>
+          </ul>
       </div>
   </nav>
 </div>

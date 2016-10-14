@@ -7,18 +7,19 @@
   <header>
     <% include ../views/partials/_header %>
   </header>
+  <h2>Edit URL</h2>
     <ul>
-      <%  %>
-        <li><%= key %> -> <a href="/u/<%= key %>"><%= urls[key] %></a>
-          <form method="POST" action="/urls/<%= key %>/delete">
+      Short URL:
+        <li><%= key %></li>
+        Full URL:
+        <li><a href="/u/<%= key %>"><%= urls[key] %></a></li>
+          <form method="POST" action="/urls/<%= key %>/edit" >
+            <input style="width: 300px" type="text" name="edit" value="<%= urls[key] %>" />
+            <button>Update</button>
+          </form>
+          <form class="u-cf" method="POST" action="/urls/<%= key %>/delete">
             <button>Delete</button>
           </form>
-          <form action="/urls/<%= key %>/edit" method="POST">
-            <input type="text" name="edit" value="<%= urls[key] %>" />
-            <button>Edit</button>
-          </form>
-        </li>
-      <% %>
     </ul>
   </div>
   </body>
